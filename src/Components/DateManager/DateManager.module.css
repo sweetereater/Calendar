@@ -1,0 +1,108 @@
+.dateManagerContainer {
+    position: fixed;
+    top: 0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+    width: 100vw;
+    z-index: 50;
+    
+}
+
+.dateManager {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: dataManagerAppearance 0.5s linear;
+    overflow: scroll;
+}
+
+@keyframes dataManagerAppearance {
+    0% {
+        right: -40%;
+    }
+
+    100% {
+        right: 0
+    }
+}
+
+.successfullPanel {
+    position: fixed;
+    top: 30%;
+    padding: 1rem 2rem;
+    color: white;
+    background-color: green;
+    border-radius: 8px;
+}
+
+
+
+.closingDateManagerContainer {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 101;
+    font-size: 20px;
+    color: black;
+}
+
+.closingDateManagerContainer:hover {
+    cursor: pointer;
+    transform: scale(1.2, 1.2);
+}
+
+.currentDate {
+    margin: 2rem;
+    padding: 1rem;
+    border-bottom: 2px solid grey;
+}
+
+.addNewTask {
+    padding: 0.8rem 2rem;
+    background-color: rgb(126, 171, 238);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid rgb(79, 143, 238);
+    outline: none;
+}
+
+.addNewTask:hover {
+    cursor: pointer;
+    background-color: rgb(19, 108, 241);
+}
+
+.tasks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 4rem;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskInput {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid lightblue;
+    cursor: pointer;
+}
+
+.taskInput:focus {
+    background-color: rgb(218, 237, 243);
+    border: 1px solid blue;
+}
+

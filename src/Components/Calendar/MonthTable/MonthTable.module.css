@@ -1,0 +1,13 @@
+.gridTable {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr repeat(6, 2fr);
+}
+
+.weekDayName { 
+    margin: 0 1rem;
+    padding: 1rem;
+    border-bottom: 2px solid grey;
+    text-align: right;    
+}
+

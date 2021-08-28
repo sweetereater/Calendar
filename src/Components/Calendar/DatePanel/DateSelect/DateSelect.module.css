@@ -1,0 +1,10 @@
+.select { 
+    outline: none;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    margin: 0.3rem;
+}
+
+.select:hover {
+    cursor: pointer;
+}
