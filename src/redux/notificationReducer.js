@@ -81,7 +81,6 @@ export const getCurrentTime = () => {
 
 export const setNotifications = (tasksForDay) => (dispatch, getState) => {
 
-    console.log(' Устанавливаем напоминания ')
     const state = getState().notificationsPage.timers;
 
     const currentTimeInSeconds = getCurrentTime();

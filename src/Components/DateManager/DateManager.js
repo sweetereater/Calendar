@@ -61,14 +61,15 @@ function DateManager(props) {
 
     const addNewTask = () => {
 
+        console.log("What's the problem, officer?");
+
         const curTime = getCurrentTime();
         const taskStartTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskStartTime))
         const taskEndTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskEndTime))
         const taskRemindTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskRemindTime))
 
-        const isValidRemindTime = taskStartTimeInSeconds > (curTime + taskRemindTimeInSeconds);
 
-        if (taskText && isValidRemindTime && taskEndTimeInSeconds > taskStartTimeInSeconds) {
+        if (taskText && (taskEndTimeInSeconds > taskStartTimeInSeconds)) {
             dispatch(createNewTaskInLC(fullDate));
             dispatch(changeNewTaskText(''));
             dispatch(showPanel(true));

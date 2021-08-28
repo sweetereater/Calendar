@@ -9,7 +9,6 @@ import { removeNotification } from '../../redux/notificationReducer';
 function Notifications() {
 
     const notifications = useSelector(state => state.notificationsPage.notifications);
-    console.log('notifications >>> ', notifications, notifications.length);
 
     const { currentYear, currentMonth, currentDay } = useSelector(state => state.calendarPage);
     const fullCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
