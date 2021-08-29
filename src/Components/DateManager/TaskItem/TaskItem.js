@@ -15,13 +15,17 @@ function TaskItem(props) {
         endTime,
     } = props.taskData;
 
-    const taskInterval = useSelector(state => state.notificationsPage.timers).find(timer => timer.taskId === id);
+    const taskTimeout = useSelector(state => state.notificationsPage.timers).find(timer => timer.taskId === id);
+    console.log('taskTimeout -> ', taskTimeout)
 
     const dispatch = useDispatch();
 
     const handleDeleteTask = (date, id) => {
 
-        if (taskInterval) clearInterval(taskInterval.intervalId);
+        if (taskTimeout) { 
+            console.log('timeOutCleared');
+            clearTimeout(taskTimeout.timerId)
+        } 
 
         dispatch(deleteTaskFromLC(date, id))
     }

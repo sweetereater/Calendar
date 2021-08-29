@@ -1,3 +1,7 @@
+import { getHoursAndMinutesFromTime, getTimeInSeconds, getCurrentTime } from '../utils/timeFunctions';
+
+
+
 const ADD_NOTIFICATION = 'notifications/ADD_NOTIFICATION'
 const DELETE_NOTIFICATION = 'notifications/DELETE_NOTIFICATION'
 const ADD_TIMER = 'notifications/ADD_TIMER'
@@ -20,7 +24,7 @@ const notificationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 notifications: state.notifications.filter(note => note.id !== action.id),
-                timers: state.timers.filter(timerId => timerId !== action.id)
+                timers: state.timers.filter(timer => timer.timerId !== action.id)
             }
 
         case ADD_TIMER:
@@ -30,7 +34,7 @@ const notificationReducer = (state = initialState, action) => {
                     ...state.timers,
                     {
                         taskId: action.taskId,
-                        intervalId: action.intervalId
+                        timerId: action.timerId
                     }
                 ]
             }
@@ -54,27 +58,16 @@ export const removeNotification = (id) => {
     }
 }
 
-export const addTimer = (taskId, intervalId) => {
+export const addTimer = (taskId, timerId) => {
     return {
         type: ADD_TIMER,
         taskId,
-        intervalId
+        timerId
     }
 }
 
 
-export const getHoursAndMinutesFromTime = (time) => time.split(':').map(value => Number(value));
 
-export const getTimeInSeconds = (hours, minutes, seconds = 0) => hours * 3600 + minutes * 60 + seconds
-
-export const getCurrentTime = () => {
-    const time = new Date();
-    const curHours = time.getHours();
-    const curMinutes = time.getMinutes();
-    const curSeconds = time.getSeconds();
-
-    return getTimeInSeconds(curHours, curMinutes, curSeconds);
-}
 
 
 
@@ -102,7 +95,7 @@ export const setNotifications = (tasksForDay) => (dispatch, getState) => {
             const delay = taskStartTime - remindTime - currentTimeInSeconds;
 
             if (delay >= 0) {
-                const taskInterval = setTimeout(() => {
+                const taskReminder = setTimeout(() => {
 
                     dispatch(addNotification(notificationObject));
                     // setTimeout(() => {
@@ -111,11 +104,10 @@ export const setNotifications = (tasksForDay) => (dispatch, getState) => {
 
                 }, delay * 1000);
 
-                dispatch(addTimer(task.id, taskInterval));
+                dispatch(addTimer(task.id, taskReminder));
 
                 const notificationObject = {
                     id: task.id,
-                    intervalId: taskInterval,
                     text: task.text,
                     startTime: task.startTime,
                     endTime: task.endTime

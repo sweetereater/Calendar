@@ -1,7 +1,7 @@
 import s from './DatePanel.module.css';
 import DateSelect from "./DateSelect/DateSelect";
 import { useSelector, useDispatch } from 'react-redux';
-import { years, months, setYear, setMonth } from "../../../redux/mainReducer";
+import { years, months, setYear, setMonth } from "../../../redux/calendarReducer";
 
 
 

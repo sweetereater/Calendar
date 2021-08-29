@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import mainReducer from "./mainReducer";
+import calendarReducer from "./calendarReducer";
 import tasksReducer from "./tasksReducer";
 import notificationReducer from "./notificationReducer";
 
 const rootReducer = combineReducers({
-    calendarPage: mainReducer,
+    calendarPage: calendarReducer,
     tasksPage: tasksReducer,
     notificationsPage: notificationReducer,
 })

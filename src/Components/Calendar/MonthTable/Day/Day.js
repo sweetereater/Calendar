@@ -28,7 +28,7 @@ function Day(props) {
     }, [currentFullDate]);
 
 
-    // Styles for other months days
+    // Styles for current month and others
     let dayContainerClasses = `${s.dayContainer}`
     let dateLinkClasses = `${s.dateLink}`
     if (curMonth !== month) {

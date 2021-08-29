@@ -1,4 +1,4 @@
-import generateMonthData from './generateMonth';
+import generateMonthData from '../utils/generateMonth';
 
 // action types
 const SET_YEAR = "calendar/SET_YEAR"
@@ -46,7 +46,7 @@ const initialState = {
 }
 
 
-const mainReducer = (state = initialState, action) => {
+const calendarReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_YEAR:
             return { ...state, year: action.payload, days: generateMonthData(action.payload, state.month) }
@@ -72,4 +72,4 @@ export const setMonth = (month) => {
 }
 
 
-export default mainReducer;
+export default calendarReducer;

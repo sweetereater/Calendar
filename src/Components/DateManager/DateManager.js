@@ -2,13 +2,13 @@ import s from './DateManager.module.css';
 import { NavLink, withRouter } from 'react-router-dom';
 
 import { CloseOutlined } from '@ant-design/icons';
-import { months } from '../../redux/mainReducer';
+import { months } from '../../redux/calendarReducer';
 import { createNewTaskInLC, changeNewTaskEndTime, changeNewTaskRemindTime, changeNewTaskStartTime, changeNewTaskText, showPanel } from '../../redux/tasksReducer';
 
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem/TaskItem';
 
-import { getCurrentTime, getTimeInSeconds, getHoursAndMinutesFromTime } from '../../redux/notificationReducer';
+import { getCurrentTime, getTimeInSeconds, getHoursAndMinutesFromTime } from '../../utils/timeFunctions';
 
 
 function DateManager(props) {
@@ -60,8 +60,6 @@ function DateManager(props) {
     }
 
     const addNewTask = () => {
-
-        console.log("What's the problem, officer?");
 
         const curTime = getCurrentTime();
         const taskStartTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskStartTime))

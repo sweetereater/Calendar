@@ -35,19 +35,24 @@ function TaskRedactor(props) {
             <div className={s.taskRedactorContainer}>
                 <NavLink to={`/date/${dateValue}`} className={s.closingTaskRedactor}> <CloseOutlined /> </NavLink>
                 <h1>Редактирование задачи</h1>
+
                 <input className={s.taskInput} value={text} onChange={(e) => handleChangeValue(e, setEditText)} />
+
                 <div className={s.taskContainer}>
                     <label htmlFor="changeStartTime">Начало</label>
                     <input id="changeStartTime" className={s.taskInput} value={startTime} onChange={(e) => handleChangeValue(e, setStartTime)} type="time" />
                 </div>
+
                 <div className={s.taskContainer}>
                     <label htmlFor="changeEndTime">Конец</label>
                     <input id="changeEndTime" className={s.taskInput} value={endTime} onChange={(e) => handleChangeValue(e, setEndTime)} type="time" />
                 </div>
+
                 <div className={s.taskContainer}>
                     <label htmlFor="changeRemindTime">Напомнить за</label>
                     <input id="changeRemindTime" className={s.taskInput} value={remindTime} onChange={(e) => handleChangeValue(e, setRemindTime)} type="time" />
                 </div>
+                
                 <NavLink className={s.successOnEdit} onClick={handleClick} to={`/date/${dateValue}`} >OK</NavLink>
             </div>
         </div>
