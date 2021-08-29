@@ -8,7 +8,7 @@ import { createNewTaskInLC, changeNewTaskEndTime, changeNewTaskRemindTime, chang
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem/TaskItem';
 
-import { getCurrentTime, getTimeInSeconds, getHoursAndMinutesFromTime } from '../../utils/timeFunctions';
+import { getTimeInSeconds, getHoursAndMinutesFromTime } from '../../utils/timeFunctions';
 
 
 function DateManager(props) {
@@ -61,11 +61,8 @@ function DateManager(props) {
 
     const addNewTask = () => {
 
-        const curTime = getCurrentTime();
         const taskStartTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskStartTime))
         const taskEndTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskEndTime))
-        const taskRemindTimeInSeconds = getTimeInSeconds(...getHoursAndMinutesFromTime(taskRemindTime))
-
 
         if (taskText && (taskEndTimeInSeconds > taskStartTimeInSeconds)) {
             dispatch(createNewTaskInLC(fullDate));

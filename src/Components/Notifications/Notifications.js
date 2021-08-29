@@ -13,20 +13,26 @@ function Notifications() {
     const { currentYear, currentMonth, currentDay } = useSelector(state => state.calendarPage);
     const fullCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
     const allTasks = useSelector(state => state.tasksPage.tasks);
-    const taskForCurDay = allTasks[fullCurrentDate] || [];
+    const tasksForCurDay = allTasks[fullCurrentDate] || [];
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setNotifications(taskForCurDay))
-    }, [taskForCurDay])
+        dispatch(setNotifications(tasksForCurDay))
+    }, [tasksForCurDay])
 
 
     return (
         <div className={s.notificationsContainer}>
             {
                 notifications.length > 0 && notifications.map(note => {
-                    return <Notification key={note.id} noteId={note.id} text={note.text} startTime={note.startTime} endTime={note.endTime} />
+                    return <Notification 
+                            key={`${note.noteType}-${note.id}`} 
+                            noteId={note.id}
+                            noteType={note.noteType}
+                            text={note.text} 
+                            startTime={note.startTime} 
+                            endTime={note.endTime} />
                 })
             }
         </div>
@@ -41,14 +47,16 @@ function Notification(props) {
 
     const dispatch = useDispatch();
 
+    const head = props.noteType === "taskRemind" ? "Напоминание" : "Напоминание о начале события"
+
     const handleClick = (noteId) => {
-        dispatch(removeNotification(noteId))
+        dispatch(removeNotification(noteId, props.noteType))
     }
 
     return (
         <div className={s.notification}>
             <button onClick={() => handleClick(props.noteId)} className={s.closeNotification} to='/'> <CloseOutlined /> </button>
-            <h3>Напоминание</h3>
+            <h3>{head}</h3>
             <p>У вас запланировано "{props.text}" с {props.startTime} до {props.endTime}</p>
         </div>
     )

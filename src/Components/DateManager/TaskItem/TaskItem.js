@@ -1,3 +1,4 @@
+import React from 'react';
 import s from './TaskItem.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTaskFromLC } from '../../../redux/tasksReducer';
@@ -15,16 +16,14 @@ function TaskItem(props) {
         endTime,
     } = props.taskData;
 
-    const taskTimeout = useSelector(state => state.notificationsPage.timers).find(timer => timer.taskId === id);
-    console.log('taskTimeout -> ', taskTimeout)
+    const taskTimeouts = useSelector(state => state.notificationsPage.timers).filter(timer => timer.taskId === id);
 
     const dispatch = useDispatch();
 
     const handleDeleteTask = (date, id) => {
 
-        if (taskTimeout) { 
-            console.log('timeOutCleared');
-            clearTimeout(taskTimeout.timerId)
+        if (taskTimeouts) { 
+            taskTimeouts.forEach(timer => clearTimeout(timer.timerId));
         } 
 
         dispatch(deleteTaskFromLC(date, id))
@@ -45,4 +44,4 @@ function TaskItem(props) {
     )
 }
 
-export default TaskItem;
+export default React.memo(TaskItem);

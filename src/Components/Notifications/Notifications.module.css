@@ -3,14 +3,16 @@
     top: 2rem;
     right: 3rem;
     z-index: 300;
-    background-color: white;
+    
 }
 
 .notification {
     position: relative;
     padding: 2rem 1rem;
-    border: 3px solid rgb(56, 180, 221);
+    border: 3px solid rgb(18, 137, 177);
     border-radius: 8px;
+    background-color: white;
+    outline: none;
 }
 
 .closeNotification {

@@ -4,11 +4,17 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons'
 import { updateTaskInLC } from '../../redux/tasksReducer';
+import { updateTimerTC } from '../../redux/notificationReducer';
 
 function TaskRedactor(props) {
 
     const { dateValue, id } = props.match.params;
+
+    // task for update
     const task = useSelector(state => state.tasksPage.tasks[dateValue].find(task => task.id === id));
+    
+    // Timeout for that task
+    const taskTimers = useSelector(state => state.notificationsPage.timers).filter(timer => timer.taskId === id);
 
     const dispatch = useDispatch();
 
@@ -22,8 +28,20 @@ function TaskRedactor(props) {
     }
 
     const handleClick = () => {
+
         if (text && startTime && endTime) {
             dispatch(updateTaskInLC(dateValue, id, text, startTime, endTime, remindTime));
+        }
+
+        if(startTime !== task.startTime){
+            const taskStartTimerId = taskTimers.find(timer => timer.timerType === "taskStart")
+            if (taskStartTimerId) dispatch(updateTimerTC(id, taskStartTimerId.timerId, "taskStart"))
+            
+        }
+
+        if(remindTime !== task.remindTime){
+            const taskReminderTimerId = taskTimers.find(timer => timer.timerType === "taskRemind")
+            if (taskReminderTimerId) dispatch(updateTimerTC(id, taskReminderTimerId.timerId, "taskRemind"))
         }
 
     }
