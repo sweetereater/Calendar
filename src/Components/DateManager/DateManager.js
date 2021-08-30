@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem/TaskItem';
 
 import { getTimeInSeconds, getHoursAndMinutesFromTime } from '../../utils/timeFunctions';
+import TaskInput from '../TaskInput/TaskInput';
 
 
 function DateManager(props) {
@@ -94,20 +95,30 @@ function DateManager(props) {
                     <div className={s.dataEntry}>
                         <input placeholder="Новая задача" className={s.taskInput} value={taskText} onChange={handleNewTaskTextChange} />
 
-                        <div className={s.inputContainer}>
-                            <label htmlFor="startTime"> Начало </label>
-                            <input id="startTime" className={s.taskInput} value={taskStartTime} onChange={updateStartTime} type="time" />
-                        </div>
+                        <TaskInput
+                            containerClassName={s.inputContainer}
+                            label="Начало"
+                            inputId="startTime"
+                            value={taskStartTime}
+                            handleChange={updateStartTime}
+                        />
 
-                        <div className={s.inputContainer}>
-                            <label htmlFor="endTime"> Конец </label>
-                            <input id="endTime" className={s.taskInput} value={taskEndTime} onChange={updateEndTime} type="time" />
-                        </div>
+                        <TaskInput
+                            containerClassName={s.inputContainer}
+                            label="Конец"
+                            inputId="endTime"
+                            value={taskEndTime}
+                            handleChange={updateEndTime}
+                        />
 
-                        <div className={s.inputContainer}>
-                            <label htmlFor="remindTime"> Напомнить за </label>
-                            <input id="remindTime" className={s.taskInput} value={taskRemindTime} onChange={updateRemindTime} type="time" />
-                        </div>
+                        <TaskInput
+                            containerClassName={s.inputContainer}
+                            label="Напомнить за"
+                            inputId="remindTime"
+                            value={taskRemindTime}
+                            handleChange={updateRemindTime}
+                        />
+
                     </div>
 
                     <button onClick={addNewTask} className={s.addNewTask}>Создать новую задачу</button>

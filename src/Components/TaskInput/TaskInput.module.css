@@ -1,0 +1,8 @@
+.taskInput {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid lightblue;
+    cursor: pointer;
+}

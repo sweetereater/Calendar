@@ -8,7 +8,7 @@ import { loadTaskFromLC } from '../../../../redux/tasksReducer';
 function Day(props) {
 
     const dispatch = useDispatch();
-    const { year, month, currentDay } = useSelector(state => state.calendarPage)
+    const { year, month } = useSelector(state => state.calendarPage)
     const { curMonth, date } = props.data;
 
     const currentFullDate = `${year}-${curMonth}-${date}`

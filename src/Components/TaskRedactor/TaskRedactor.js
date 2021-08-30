@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons'
 import { updateTaskInLC } from '../../redux/tasksReducer';
 import { updateTimerTC } from '../../redux/notificationReducer';
+import TaskInput from '../TaskInput/TaskInput';
 
 function TaskRedactor(props) {
 
@@ -12,7 +13,7 @@ function TaskRedactor(props) {
 
     // task for update
     const task = useSelector(state => state.tasksPage.tasks[dateValue].find(task => task.id === id));
-    
+
     // Timeout for that task
     const taskTimers = useSelector(state => state.notificationsPage.timers).filter(timer => timer.taskId === id);
 
@@ -33,13 +34,13 @@ function TaskRedactor(props) {
             dispatch(updateTaskInLC(dateValue, id, text, startTime, endTime, remindTime));
         }
 
-        if(startTime !== task.startTime){
+        if (startTime !== task.startTime) {
             const taskStartTimerId = taskTimers.find(timer => timer.timerType === "taskStart")
             if (taskStartTimerId) dispatch(updateTimerTC(id, taskStartTimerId.timerId, "taskStart"))
-            
+
         }
 
-        if(remindTime !== task.remindTime){
+        if (remindTime !== task.remindTime) {
             const taskReminderTimerId = taskTimers.find(timer => timer.timerType === "taskRemind")
             if (taskReminderTimerId) dispatch(updateTimerTC(id, taskReminderTimerId.timerId, "taskRemind"))
         }
@@ -56,22 +57,32 @@ function TaskRedactor(props) {
 
                 <input className={s.taskInput} value={text} onChange={(e) => handleChangeValue(e, setEditText)} />
 
-                <div className={s.taskContainer}>
-                    <label htmlFor="changeStartTime">Начало</label>
-                    <input id="changeStartTime" className={s.taskInput} value={startTime} onChange={(e) => handleChangeValue(e, setStartTime)} type="time" />
-                </div>
+                <TaskInput
+                    containerClassName={s.taskContainer}
+                    label="Начало"
+                    inputId="changeStartTime"
+                    value={startTime}
+                    handleChange={(e) => handleChangeValue(e, setStartTime)}
+                />
 
-                <div className={s.taskContainer}>
-                    <label htmlFor="changeEndTime">Конец</label>
-                    <input id="changeEndTime" className={s.taskInput} value={endTime} onChange={(e) => handleChangeValue(e, setEndTime)} type="time" />
-                </div>
+                <TaskInput
+                    containerClassName={s.taskContainer}
+                    label="Конец"
+                    inputId="changeEndTime"
+                    value={endTime}
+                    handleChange={(e) => handleChangeValue(e, setEndTime)}
+                />
 
-                <div className={s.taskContainer}>
-                    <label htmlFor="changeRemindTime">Напомнить за</label>
-                    <input id="changeRemindTime" className={s.taskInput} value={remindTime} onChange={(e) => handleChangeValue(e, setRemindTime)} type="time" />
-                </div>
-                
-                <NavLink className={s.successOnEdit} onClick={handleClick} to={`/date/${dateValue}`} >OK</NavLink>
+                <TaskInput
+                    containerClassName={s.taskContainer}
+                    label="Напомнить за"
+                    inputId="changeRemindTime"
+                    value={remindTime}
+                    handleChange={(e) => handleChangeValue(e, setRemindTime)}
+                />
+
+                <NavLink className={s.successOnEdit} onClick={handleClick} to={`/date/${dateValue}`}> OK </NavLink>
+
             </div>
         </div>
     )
