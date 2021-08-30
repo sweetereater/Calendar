@@ -66,7 +66,12 @@ function DateManager(props) {
 
         if (taskText && (taskEndTimeInSeconds > taskStartTimeInSeconds)) {
             dispatch(createNewTaskInLC(fullDate));
+
             dispatch(changeNewTaskText(''));
+            dispatch(changeNewTaskStartTime('10:00'));
+            dispatch(changeNewTaskEndTime('11:00'));
+            dispatch(changeNewTaskRemindTime('00:00'));
+
             dispatch(showPanel(true));
             setTimeout(() => {
                 dispatch(showPanel(false));

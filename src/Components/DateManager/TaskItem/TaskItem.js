@@ -22,9 +22,9 @@ function TaskItem(props) {
 
     const handleDeleteTask = (date, id) => {
 
-        if (taskTimeouts) { 
+        if (taskTimeouts) {
             taskTimeouts.forEach(timer => clearTimeout(timer.timerId));
-        } 
+        }
 
         dispatch(deleteTaskFromLC(date, id))
     }
